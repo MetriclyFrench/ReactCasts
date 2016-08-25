@@ -1,0 +1,77 @@
+<head>
+  <!-- React Scripts -->
+  <script src="https://npmcdn.com/react@15.3.1/dist/react.js"></script>
+  <script src="https://npmcdn.com/react-dom@15.3.1/dist/react-dom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container">
+
+  </div>
+</body>
+
+<script type="text/jsx">
+  // Define a class
+  var Badge = React.createClass({
+    render: function() {
+      return <button className="btn btn-primary" type="button">
+        {this.props.title} <span className="badge">{this.props.number}</span>
+      </button>
+    }
+  });
+
+  var Thumbnail = React.createClass({
+    render: function() {
+      return <div className="col-sm-6 col-md-4">
+        <div className="thumbnail">
+          <img src={this.props.imageURL} alt="..." ></img>
+          <div className="caption">
+            <h3>{this.props.header}</h3>
+            <p>{this.props.description}</p>
+            <p>
+              <Badge title={this.props.title} number={this.props.number} />
+            </p>
+          </div>
+        </div>
+      </div>
+    }
+  });
+
+  var ThumbnailList = React.createClass({
+    render: function() {
+      var list = this.props.thumbnailData.map(function(thumbnailProps){
+        return <Thumbnail {...thumbnailProps} />
+      });
+
+      return <div>
+        {list}
+      </div>
+    }
+  });
+
+  var options = {
+    thumbnailData: [{
+      title: "Show Courses",
+      number: 14,
+      header: 'Learn React',
+      description: 'React is a fantastic new library for making fast, dynamic pages. React is a fantastic new library for making fast, dynamic pages.React is a fantastic new library for making fast, dynamic pages.',
+      imageURL: 'https://raw.githubusercontent.com/wiki/facebook/react/react-logo-1000-transparent.png'
+    },{
+      title: "Show Courses",
+      number: 11,
+      header: 'Learn Gulp',
+      description: 'Gulp will speed up your development workflow.  Gulp will speed up your development workflow.  Gulp will speed up your development workflow.',
+      imageURL: 'http://brunch.io/images/others/gulp.png'
+    }]
+  };
+
+  // Asks React to render this class
+  var element = React.createElement(ThumbnailList, options);
+
+  // Asks React to place this class in body tag after it's rendered
+  ReactDOM.render(element, document.querySelector('.container'));
+</script>
