@@ -1,5 +1,6 @@
 # Ignore these files
 **/.DS_Store
+main.js
 
 # Ignore these folders
 node_modules/
